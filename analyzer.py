@@ -9,7 +9,7 @@ if not api_key:
     import streamlit as st
     api_key = st.secrets["GEMINI_API_KEY"]
 
-client = genai.Client(api_key=AIzaSyA6Gg5BX2hUVLXG5eFKqSJEsaN0rXchrfg)
+client = genai.Client(api_key=api_key)
 
 def extract_skills(job_description):
     prompt = skill_extraction_prompt(job_description)
