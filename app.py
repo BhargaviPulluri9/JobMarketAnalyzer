@@ -1,6 +1,12 @@
 import streamlit as st
 from analyzer import extract_skills, analyze_gap
 
+try:
+    key = st.secrets["GEMINI_API_KEY"]
+    st.sidebar.success(f"✅ Key found! Length: {len(key)}")
+except Exception as e:
+    st.sidebar.error(f"❌ Secret error: {str(e)}")
+
 st.set_page_config(
     page_title="Job Market Analyzer",
     page_icon="🎯",
