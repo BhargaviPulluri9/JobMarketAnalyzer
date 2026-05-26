@@ -2,6 +2,7 @@ from google import genai
 import os
 from dotenv import load_dotenv
 import streamlit as st
+from prompts import skill_extraction_prompt, gap_analysis_prompt
 
 load_dotenv()
 
