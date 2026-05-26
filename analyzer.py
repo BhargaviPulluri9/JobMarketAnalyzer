@@ -1,14 +1,18 @@
 from google import genai
 import os
 from dotenv import load_dotenv
-from prompts import skill_extraction_prompt, gap_analysis_prompt
+import streamlit as st
 
 load_dotenv()
 
-api_key = os.getenv("GEMINI_API_KEY")
-if not api_key:
-    import streamlit as st
+try:
     api_key = st.secrets["GEMINI_API_KEY"]
+except:
+    api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    st.error("No API key found! Please set GEMINI_API_KEY in secrets.")
+    st.stop()
 
 client = genai.Client(api_key=api_key)
 
