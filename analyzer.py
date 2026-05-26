@@ -20,7 +20,7 @@ client = genai.Client(api_key=api_key)
 def extract_skills(job_description):
     prompt = skill_extraction_prompt(job_description)
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash",
         contents=prompt
     )
     return parse_sections(response.text)
@@ -28,7 +28,7 @@ def extract_skills(job_description):
 def analyze_gap(job_description, resume_text):
     prompt = gap_analysis_prompt(job_description, resume_text)
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash",
         contents=prompt
     )
     return parse_sections(response.text)
