@@ -1,12 +1,6 @@
 import streamlit as st
 from analyzer import extract_skills, analyze_gap
 
-try:
-    key = st.secrets["GEMINI_API_KEY"]
-    st.sidebar.success(f"✅ Key found! Length: {len(key)}")
-except Exception as e:
-    st.sidebar.error(f"❌ Secret error: {str(e)}")
-
 st.set_page_config(
     page_title="Job Market Analyzer",
     page_icon="🎯",
@@ -119,8 +113,14 @@ if st.button("🔍 Analyze My Fit", type="primary", use_container_width=True):
 
         with col_b:
             st.subheader("📝 Verdict")
-            verdict = gap_data.get("OVERALL_VERDICT", [""])
-            st.write(" ".join(verdict))
+            verdict = gap_data.get("OVERALL_VERDICT", [])
+            if verdict:
+                if isinstance(verdict, list):
+                    st.write(" ".join(verdict))
+                else:
+                    st.write(verdict)
+            else:
+                st.write("No verdict generated.")
 
         with st.expander("See full job requirements breakdown"):
             c1, c2 = st.columns(2)

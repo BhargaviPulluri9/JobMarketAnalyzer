@@ -21,7 +21,8 @@ def extract_skills(job_description):
     prompt = skill_extraction_prompt(job_description)
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=prompt
+        contents=prompt,
+        config={"temperature": 0.1}
     )
     return parse_sections(response.text)
 
@@ -29,7 +30,8 @@ def analyze_gap(job_description, resume_text):
     prompt = gap_analysis_prompt(job_description, resume_text)
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=prompt
+        contents=prompt,
+        config={"temperature": 0.1}
     )
     return parse_sections(response.text)
 
